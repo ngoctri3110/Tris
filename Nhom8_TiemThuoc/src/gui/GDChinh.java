@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 
-public class GDChinh extends JFrame{
+public class GDChinh {
 	JFrame frame;
 	public GDChinh() {
 	}
@@ -120,11 +120,11 @@ public class GDChinh extends JFrame{
 		lblTieuDe.setForeground(new Color(222, 184, 135));
 		lblTieuDe.setBackground(new Color(255, 255, 255));
 		lblTieuDe.setFont(new Font("Tahoma", Font.BOLD, 40));
-		lblTieuDe.setBounds(336, 46, 476, 96);
+		lblTieuDe.setBounds(372, 41, 476, 96);
 		pnChinh.add(lblTieuDe);
 
 		JLabel lblHinhChinh = new JLabel("");
-		lblHinhChinh.setBounds(577, 163, 235, 321);
+		lblHinhChinh.setBounds(478, 173, 235, 321);
 		pnChinh.add(lblHinhChinh);
 
 	}
