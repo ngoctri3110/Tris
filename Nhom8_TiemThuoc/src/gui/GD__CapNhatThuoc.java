@@ -12,11 +12,16 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class GD__CapNhatThuoc extends JFrame {
 
@@ -177,7 +182,7 @@ public class GD__CapNhatThuoc extends JFrame {
 		
 		JLabel lblNgaySX = new JLabel("Ngày Sản Xuất :");
 		lblNgaySX.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNgaySX.setBounds(399, 136, 135, 25);
+		lblNgaySX.setBounds(399, 134, 135, 25);
 		pCenter.add(lblNgaySX);
 		
 		txtNgaySX = new JTextField();
@@ -203,33 +208,52 @@ public class GD__CapNhatThuoc extends JFrame {
 		pSouth.setLayout(null);
 		
 		JButton btnSua = new JButton("Sửa");
-		btnSua.setBackground(new Color(0, 255, 0));
+		Image img_Sua = new ImageIcon(this.getClass().getResource("/img/sua.png")).getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
+		btnSua.setIcon(new ImageIcon(img_Sua));
+		btnSua.setForeground(new Color(199, 21, 133));
+		btnSua.setBackground(new Color(255, 240, 245));
 		btnSua.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnSua.setBounds(43, 32, 112, 34);
 		pSouth.add(btnSua);
 		
 		JButton btnXoa = new JButton("Xóa");
-		btnXoa.setBackground(new Color(0, 255, 0));
+		Image img_Xoa = new ImageIcon(this.getClass().getResource("/img/xoa.png")).getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
+		btnXoa.setIcon(new ImageIcon(img_Xoa));
+		btnXoa.setForeground(new Color(199, 21, 133));
+		btnXoa.setBackground(new Color(255, 240, 245));
 		btnXoa.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnXoa.setBounds(175, 32, 112, 34);
 		pSouth.add(btnXoa);
 		
 		JButton btnXoaRong = new JButton("Xóa Rỗng");
-		btnXoaRong.setBackground(new Color(0, 255, 0));
+		Image img_XoaRong = new ImageIcon(this.getClass().getResource("/img/xoarong.png")).getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
+		btnXoaRong.setIcon(new ImageIcon(img_XoaRong));
+		btnXoaRong.setForeground(new Color(199, 21, 133));
+		btnXoaRong.setBackground(new Color(255, 240, 245));
 		btnXoaRong.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnXoaRong.setBounds(310, 32, 112, 34);
+		btnXoaRong.setBounds(310, 32, 152, 34);
 		pSouth.add(btnXoaRong);
 		
 		JButton btnLuu = new JButton("Lưu");
-		btnLuu.setBackground(new Color(0, 255, 0));
+		Image img_Luu = new ImageIcon(this.getClass().getResource("/img/luu.png")).getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
+		btnLuu.setIcon(new ImageIcon(img_Luu));
+		btnLuu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {	
+			}
+		});
+		btnLuu.setForeground(new Color(199, 21, 133));
+		btnLuu.setBackground(new Color(255, 240, 245));
 		btnLuu.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnLuu.setBounds(445, 32, 105, 34);
+		btnLuu.setBounds(485, 32, 105, 34);
 		pSouth.add(btnLuu);
 		
 		JButton btnQuayLai = new JButton("Quay Lại");
-		btnQuayLai.setBackground(new Color(0, 255, 0));
+		Image img_QuayLai = new ImageIcon(this.getClass().getResource("/img/quaylai.png")).getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
+		btnQuayLai.setIcon(new ImageIcon(img_QuayLai));
+		btnQuayLai.setForeground(new Color(199, 21, 133));
+		btnQuayLai.setBackground(new Color(255, 240, 245));
 		btnQuayLai.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnQuayLai.setBounds(861, 32, 125, 34);
+		btnQuayLai.setBounds(861, 32, 144, 34);
 		pSouth.add(btnQuayLai);
 	}
 }
