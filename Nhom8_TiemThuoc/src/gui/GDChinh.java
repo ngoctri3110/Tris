@@ -11,7 +11,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 
-public class GDChinh {
+public class GDChinh extends JFrame{
+	JFrame frame;
 	public GDChinh() {
 	}
 
