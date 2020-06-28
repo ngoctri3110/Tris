@@ -33,7 +33,6 @@ public class GD__CapNhatThuoc extends JFrame {
 	private JTextField txtGiaThuoc;
 	private JTextField txtCongDung;
 	private JTextField txtSoluong;
-	private JTextField txtDonVi;
 	private JTextField txtNgaySX;
 	private JTextField txtNgayHetHan;
 
@@ -64,6 +63,7 @@ public class GD__CapNhatThuoc extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setLocationRelativeTo(null);
 		
 		JPanel pnChinh = new JPanel();
 		pnChinh.setBackground(new Color(127, 255, 212));
@@ -95,114 +95,113 @@ public class GD__CapNhatThuoc extends JFrame {
 		scrollPane.setViewportView(tablecapnhat);
 		
 		JPanel pCenter = new JPanel();
-		pCenter.setBackground(new Color(255, 192, 203));
+		pCenter.setBackground(new Color(255, 255, 224));
 		pCenter.setBounds(22, 290, 1034, 210);
-		pCenter.setBorder(new MatteBorder(10, 10, 10, 10, (Color) new Color(255, 99, 71)));
+		pCenter.setBorder(new MatteBorder(5, 5, 5, 5, (Color) new Color(255, 99, 71)));
 		pnChinh.add(pCenter);
 		pCenter.setLayout(null);
 		
-		JLabel lblTim = new JLabel("Tìm :");
-		lblTim.setBounds(22, 24, 47, 22);
+		JLabel lblTim = new JLabel("Tìm theo mã :");
+		lblTim.setBounds(22, 26, 122, 22);
 		lblTim.setFont(new Font("Tahoma", Font.BOLD, 16));
 		pCenter.add(lblTim);
 		
 		JComboBox cbTim = new JComboBox();
-		cbTim.setBounds(144, 26, 127, 22);
+		cbTim.setBounds(154, 28, 127, 22);
 		pCenter.add(cbTim);
 		
 		JLabel lblMaThuoc = new JLabel("Mã Thuốc :");
-		lblMaThuoc.setBounds(23, 72, 111, 13);
+		lblMaThuoc.setBounds(23, 65, 111, 13);
 		lblMaThuoc.setFont(new Font("Tahoma", Font.BOLD, 16));
 		pCenter.add(lblMaThuoc);
 		
 		txtMaThuoc = new JTextField();
-		txtMaThuoc.setBounds(144, 70, 220, 22);
+		txtMaThuoc.setBounds(154, 61, 220, 22);
 		pCenter.add(txtMaThuoc);
 		txtMaThuoc.setColumns(10);
 		
 		JLabel lblTenThuoc = new JLabel("Tên Thuốc : ");
-		lblTenThuoc.setBounds(22, 107, 99, 13);
+		lblTenThuoc.setBounds(22, 98, 112, 13);
 		lblTenThuoc.setFont(new Font("Tahoma", Font.BOLD, 16));
 		pCenter.add(lblTenThuoc);
 		
 		txtTenThuoc = new JTextField();
-		txtTenThuoc.setBounds(144, 102, 220, 23);
+		txtTenThuoc.setBounds(154, 93, 516, 23);
 		pCenter.add(txtTenThuoc);
 		txtTenThuoc.setColumns(10);
 		
 		JLabel lblNhaCungCap = new JLabel("Nhà cung cấp :");
-		lblNhaCungCap.setBounds(22, 137, 121, 22);
+		lblNhaCungCap.setBounds(22, 124, 121, 22);
 		lblNhaCungCap.setFont(new Font("Tahoma", Font.BOLD, 16));
 		pCenter.add(lblNhaCungCap);
 		
 		txtNhaCungCap = new JTextField();
-		txtNhaCungCap.setBounds(144, 138, 220, 22);
+		txtNhaCungCap.setBounds(154, 125, 516, 22);
 		pCenter.add(txtNhaCungCap);
 		txtNhaCungCap.setColumns(10);
 		
 		JLabel lblGiaThuoc = new JLabel("Giá thuốc :");
-		lblGiaThuoc.setBounds(22, 174, 121, 13);
+		lblGiaThuoc.setBounds(706, 63, 121, 13);
 		lblGiaThuoc.setFont(new Font("Tahoma", Font.BOLD, 16));
 		pCenter.add(lblGiaThuoc);
 		
 		txtGiaThuoc = new JTextField();
-		txtGiaThuoc.setBounds(144, 169, 220, 22);
+		txtGiaThuoc.setBounds(854, 58, 153, 22);
 		pCenter.add(txtGiaThuoc);
 		txtGiaThuoc.setColumns(10);
 		
 		JLabel lblCongDung = new JLabel("Công dụng :");
-		lblCongDung.setBounds(399, 70, 98, 17);
+		lblCongDung.setBounds(22, 157, 98, 17);
 		lblCongDung.setFont(new Font("Tahoma", Font.BOLD, 16));
 		pCenter.add(lblCongDung);
 		
 		txtCongDung = new JTextField();
-		txtCongDung.setBounds(547, 66, 465, 19);
+		txtCongDung.setBounds(154, 156, 516, 22);
 		pCenter.add(txtCongDung);
 		txtCongDung.setColumns(10);
 		
 		JLabel lblSoLuong = new JLabel("Số lượng :");
-		lblSoLuong.setBounds(399, 98, 99, 22);
+		lblSoLuong.setBounds(706, 91, 99, 22);
 		lblSoLuong.setFont(new Font("Tahoma", Font.BOLD, 16));
 		pCenter.add(lblSoLuong);
 		
 		txtSoluong = new JTextField();
-		txtSoluong.setBounds(547, 95, 153, 22);
+		txtSoluong.setBounds(854, 91, 153, 22);
 		pCenter.add(txtSoluong);
 		txtSoluong.setColumns(10);
 		
 		JLabel lblDonVi = new JLabel("Đơn vị :");
-		lblDonVi.setBounds(710, 95, 74, 25);
+		lblDonVi.setBounds(411, 59, 74, 25);
 		lblDonVi.setFont(new Font("Tahoma", Font.BOLD, 16));
 		pCenter.add(lblDonVi);
 		
-		txtDonVi = new JTextField();
-		txtDonVi.setBounds(783, 95, 229, 22);
-		pCenter.add(txtDonVi);
-		txtDonVi.setColumns(10);
+		JComboBox cboDonVi = new JComboBox();
+		cboDonVi.setBounds(517, 62, 153, 22);
+		pCenter.add(cboDonVi);
 		
 		JLabel lblNgaySX = new JLabel("Ngày Sản Xuất :");
 		lblNgaySX.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNgaySX.setBounds(399, 134, 135, 25);
+		lblNgaySX.setBounds(706, 122, 135, 25);
 		pCenter.add(lblNgaySX);
 		
 		txtNgaySX = new JTextField();
-		txtNgaySX.setBounds(547, 137, 229, 23);
+		txtNgaySX.setBounds(854, 123, 153, 23);
 		pCenter.add(txtNgaySX);
 		txtNgaySX.setColumns(10);
 		
 		JLabel lblNgayHetHan = new JLabel("Ngày hết hạn :");
 		lblNgayHetHan.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNgayHetHan.setBounds(399, 174, 135, 17);
+		lblNgayHetHan.setBounds(706, 158, 135, 17);
 		pCenter.add(lblNgayHetHan);
 		
 		txtNgayHetHan = new JTextField();
-		txtNgayHetHan.setBounds(547, 169, 229, 23);
+		txtNgayHetHan.setBounds(854, 156, 153, 23);
 		pCenter.add(txtNgayHetHan);
 		txtNgayHetHan.setColumns(10);
 		
 		JPanel pSouth = new JPanel();
-		pSouth.setBackground(new Color(255, 192, 203));
-		pSouth.setBorder(new MatteBorder(10, 10, 10, 10, (Color) new Color(255, 99, 71)));
+		pSouth.setBackground(new Color(250, 250, 210));
+		pSouth.setBorder(new MatteBorder(5, 5, 5, 5, (Color) new Color(255, 99, 71)));
 		pSouth.setBounds(22, 510, 1034, 102);
 		pnChinh.add(pSouth);
 		pSouth.setLayout(null);
@@ -213,7 +212,7 @@ public class GD__CapNhatThuoc extends JFrame {
 		btnSua.setForeground(new Color(199, 21, 133));
 		btnSua.setBackground(new Color(255, 240, 245));
 		btnSua.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnSua.setBounds(43, 32, 112, 34);
+		btnSua.setBounds(78, 32, 152, 34);
 		pSouth.add(btnSua);
 		
 		JButton btnXoa = new JButton("Xóa");
@@ -222,7 +221,7 @@ public class GD__CapNhatThuoc extends JFrame {
 		btnXoa.setForeground(new Color(199, 21, 133));
 		btnXoa.setBackground(new Color(255, 240, 245));
 		btnXoa.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnXoa.setBounds(175, 32, 112, 34);
+		btnXoa.setBounds(257, 32, 152, 34);
 		pSouth.add(btnXoa);
 		
 		JButton btnXoaRong = new JButton("Xóa Rỗng");
@@ -231,7 +230,7 @@ public class GD__CapNhatThuoc extends JFrame {
 		btnXoaRong.setForeground(new Color(199, 21, 133));
 		btnXoaRong.setBackground(new Color(255, 240, 245));
 		btnXoaRong.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnXoaRong.setBounds(310, 32, 152, 34);
+		btnXoaRong.setBounds(439, 32, 152, 34);
 		pSouth.add(btnXoaRong);
 		
 		JButton btnLuu = new JButton("Lưu");
@@ -244,16 +243,23 @@ public class GD__CapNhatThuoc extends JFrame {
 		btnLuu.setForeground(new Color(199, 21, 133));
 		btnLuu.setBackground(new Color(255, 240, 245));
 		btnLuu.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnLuu.setBounds(485, 32, 105, 34);
+		btnLuu.setBounds(621, 32, 152, 34);
 		pSouth.add(btnLuu);
 		
 		JButton btnQuayLai = new JButton("Quay Lại");
+		btnQuayLai.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GD_Chinh chinh = new GD_Chinh();
+				chinh.setVisible(true);
+				dispose();
+			}
+		});
 		Image img_QuayLai = new ImageIcon(this.getClass().getResource("/img/quaylai.png")).getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
 		btnQuayLai.setIcon(new ImageIcon(img_QuayLai));
 		btnQuayLai.setForeground(new Color(199, 21, 133));
 		btnQuayLai.setBackground(new Color(255, 240, 245));
 		btnQuayLai.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnQuayLai.setBounds(861, 32, 144, 34);
+		btnQuayLai.setBounds(804, 32, 152, 34);
 		pSouth.add(btnQuayLai);
 	}
 }
