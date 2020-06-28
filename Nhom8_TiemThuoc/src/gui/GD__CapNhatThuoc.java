@@ -22,6 +22,8 @@ import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class GD__CapNhatThuoc extends JFrame {
 
@@ -35,6 +37,8 @@ public class GD__CapNhatThuoc extends JFrame {
 	private JTextField txtSoluong;
 	private JTextField txtNgaySX;
 	private JTextField txtNgayHetHan;
+	private DefaultTableModel modelCapNhat;
+	private JComboBox<String> cboDonVi; 
 
 	/**
 	 * Launch the application.
@@ -74,18 +78,36 @@ public class GD__CapNhatThuoc extends JFrame {
 		
 		JPanel pNorth = new JPanel();
 		pNorth.setBounds(22, 21, 1034, 259);
-		pNorth.setBackground(new Color(255, 192, 203));
-		pNorth.setBorder(new MatteBorder(10, 10, 10, 10, (Color) new Color(255, 99, 71)));
+		pNorth.setBackground(new Color(245, 245, 220));
+		pNorth.setBorder(new MatteBorder(5, 5, 5, 5, (Color) new Color(255, 99, 71)));
 		pnChinh.add(pNorth);
 		pNorth.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(21, 21, 992, 215);
+		scrollPane.addMouseListener(new MouseAdapter() {
+		});
+		scrollPane.setBounds(10, 10, 1014, 239);
 		pNorth.add(scrollPane);
 		
+		
 		tablecapnhat = new JTable();
+		tablecapnhat.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int row = tablecapnhat.getSelectedRow();
+				txtMaThuoc.setText(modelCapNhat.getValueAt(row, 0).toString());
+				txtTenThuoc.setText(modelCapNhat.getValueAt(row, 1).toString());
+				txtNhaCungCap.setText(modelCapNhat.getValueAt(row, 2).toString());
+				txtGiaThuoc.setText(modelCapNhat.getValueAt(row, 3).toString());
+				txtCongDung.setText(modelCapNhat.getValueAt(row, 4).toString());
+				txtSoluong.setText(modelCapNhat.getValueAt(row, 5).toString());
+				cboDonVi.setSelectedItem(modelCapNhat.getValueAt(row, 6).toString());
+				txtNgaySX.setText(modelCapNhat.getValueAt(row, 7).toString());
+				txtNgayHetHan.setText(modelCapNhat.getValueAt(row, 8).toString());
+			}
+		});
 		tablecapnhat.setFont(new Font("Tahoma", Font.BOLD, 18));
-		tablecapnhat.setModel(new DefaultTableModel(
+		tablecapnhat.setModel(modelCapNhat = new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
@@ -225,6 +247,22 @@ public class GD__CapNhatThuoc extends JFrame {
 		pSouth.add(btnXoa);
 		
 		JButton btnXoaRong = new JButton("Xóa Rỗng");
+		btnXoaRong.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Object o = e.getSource();
+				if(o.equals(btnXoaRong)) {
+					txtMaThuoc.setText("");
+					txtTenThuoc.setText("");
+					txtNhaCungCap.setText("");
+					txtGiaThuoc.setText("");
+					txtCongDung.setText("");
+					txtSoluong.setText("");
+					txtNgaySX.setText("");
+					txtNgayHetHan.setText("");
+					txtMaThuoc.requestFocus();
+				}
+			}
+		});
 		Image img_XoaRong = new ImageIcon(this.getClass().getResource("/img/xoarong.png")).getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
 		btnXoaRong.setIcon(new ImageIcon(img_XoaRong));
 		btnXoaRong.setForeground(new Color(199, 21, 133));

@@ -128,7 +128,7 @@ public class GD_Chinh extends JFrame {
 		JLabel lblLogo = new JLabel("");
 		lblLogo.setBounds(90, 10, 150, 146);
 		pnChucNang.add(lblLogo);
-		Image img = new ImageIcon(this.getClass().getResource("/img/hospital.png")).getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+		Image img = new ImageIcon(this.getClass().getResource("/img/tiemthuoc.png")).getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
 		lblLogo.setIcon(new ImageIcon(img));
 		lblLogo.setHorizontalAlignment(SwingConstants.TRAILING);
 
@@ -151,7 +151,7 @@ public class GD_Chinh extends JFrame {
 			}	
 		});
 		btnThemTTThuoc.setFont(new Font("Tahoma", Font.BOLD, 16));
-		Image img_IconThem = new ImageIcon(this.getClass().getResource("/img/plus.png")).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+		Image img_IconThem = new ImageIcon(this.getClass().getResource("/img/themthuoc.png")).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
 		btnThemTTThuoc.setIcon(new ImageIcon(img_IconThem));
 		JLabel lblTieuDe = new JLabel("TI\u1EC6M THU\u1ED0C 3T");
 		lblTieuDe.setHorizontalAlignment(SwingConstants.CENTER);
@@ -164,7 +164,7 @@ public class GD_Chinh extends JFrame {
 		JLabel lblHinhChinh = new JLabel("");
 		lblHinhChinh.setBounds(337, 0, 547, 563);
 		pnChinh.add(lblHinhChinh);
-		Image img1 = new ImageIcon(this.getClass().getResource("/img/doctor.jpg")).getImage().getScaledInstance(500, 400, Image.SCALE_SMOOTH);
+		Image img1 = new ImageIcon(this.getClass().getResource("/img/bacsi.jpg")).getImage().getScaledInstance(500, 400, Image.SCALE_SMOOTH);
 		lblHinhChinh.setIcon(new ImageIcon(img1));
 		lblHinhChinh.setHorizontalAlignment(SwingConstants.CENTER);
 	}
