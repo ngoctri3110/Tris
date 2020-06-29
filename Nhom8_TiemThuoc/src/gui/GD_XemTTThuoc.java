@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -13,22 +12,30 @@ import java.awt.Image;
 import javax.swing.JComboBox;
 import java.awt.Color;
 import javax.swing.border.MatteBorder;
-import javax.swing.border.TitledBorder;
-import javax.swing.border.EtchedBorder;
 import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
 import javax.swing.JTable;
-import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
+
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
+
+import connectDB.ConnectDB;
+import dao.Thuoc_DAO;
+import entity.Thuoc;
+
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
 
 public class GD_XemTTThuoc extends JFrame {
 
 	private JPanel contentPane;
 	private JTable tableTimKiem;
+	private Thuoc_DAO thuoc_dao;
+	private DefaultTableModel modelTimKiem;
 
 	/**
 	 * Launch the application.
@@ -50,6 +57,15 @@ public class GD_XemTTThuoc extends JFrame {
 	 * Create the frame.
 	 */
 	public GD_XemTTThuoc() {
+		try {
+			ConnectDB.getInstance().connect();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		thuoc_dao = new Thuoc_DAO();
+		
 		setTitle("TÌM KIẾM THÔNG TIN THUỐC");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1200, 670);
@@ -123,6 +139,37 @@ public class GD_XemTTThuoc extends JFrame {
 		cboTimNHH.setBounds(1039, 76, 115, 22);
 		pNorth.add(cboTimNHH);
 		cboTimNHH.setEditable(true);
+		
+		ArrayList<Thuoc> listThuoc = thuoc_dao.getThuocs();
+		for(Thuoc t : listThuoc) {
+			cboTimMaThuoc.addItem(t.getMaThuoc());
+			cboTimTenThuoc.addItem(t.getTenThuoc());
+			cboTimNCC.addItem(t.getNhaCungCap());
+			cboTimCongDung.addItem(t.getCongDung());
+			cboTimDonVi.addItem(t.getDonViTinh());
+			cboTimGiaThuoc.addItem(t.getGiaThuoc());
+			cboTimNHH.addItem(t.getNgayHetHan());
+			cboTimNSX.addItem(t.getNgaySanXuat());
+			cboTimSL.addItem(t.getSoLuong());
+		}
+		cboTimNHH.setSelectedItem("");
+		cboTimCongDung.setSelectedItem("");
+		cboTimDonVi.setSelectedItem("");
+		cboTimGiaThuoc.setSelectedItem("");
+		cboTimMaThuoc.setSelectedItem("");
+		cboTimNCC.setSelectedItem("");
+		cboTimNSX.setSelectedItem("");
+		cboTimSL.setSelectedItem("");
+		cboTimTenThuoc.setSelectedItem("");
+		AutoCompleteDecorator.decorate(cboTimNHH);
+		AutoCompleteDecorator.decorate(cboTimCongDung);
+		AutoCompleteDecorator.decorate(cboTimDonVi);
+		AutoCompleteDecorator.decorate(cboTimGiaThuoc);
+		AutoCompleteDecorator.decorate(cboTimMaThuoc);
+		AutoCompleteDecorator.decorate(cboTimNCC);
+		AutoCompleteDecorator.decorate(cboTimNSX);
+		AutoCompleteDecorator.decorate(cboTimSL);
+		AutoCompleteDecorator.decorate(cboTimTenThuoc);
 		
 		JLabel lblMaThuoc = new JLabel("Mã thuốc");
 		lblMaThuoc.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -252,6 +299,11 @@ public class GD_XemTTThuoc extends JFrame {
 		btnQuayLai.setIcon(new ImageIcon(h_quaylai));
 		
 		JButton btnLamMoiDS = new JButton("Làm mới danh sách");
+		btnLamMoiDS.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//su kien
+			}
+		});
 		btnLamMoiDS.setForeground(new Color(199, 21, 133));
 		btnLamMoiDS.setFont(new Font("Tahoma", Font.BOLD, 19));
 		btnLamMoiDS.setBackground(new Color(0, 255, 255));
@@ -273,18 +325,34 @@ public class GD_XemTTThuoc extends JFrame {
 		
 		tableTimKiem = new JTable();
 		tableTimKiem.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		tableTimKiem.setModel(new DefaultTableModel(
+		tableTimKiem.setModel(modelTimKiem = new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
 				"M\u00E3 thu\u1ED1c", "T\u00EAn thu\u1ED1c", "Nh\u00E0 cung c\u1EA5p", "Gi\u00E1 thu\u1ED1c", "C\u00F4ng d\u1EE5ng", "S\u1ED1 l\u01B0\u1EE3ng", "\u0110\u01A1n v\u1ECB", "Ng\u00E0y s\u1EA3n xu\u1EA5t", "Ng\u00E0y h\u1EBFt h\u1EA1n"
 			}
 		));
+		
+		DocDuLieuDBVaoTable();
+		
 		tableTimKiem.getColumnModel().getColumn(0).setPreferredWidth(55);
 		tableTimKiem.getColumnModel().getColumn(1).setPreferredWidth(119);
 		tableTimKiem.getColumnModel().getColumn(2).setPreferredWidth(110);
 		tableTimKiem.getColumnModel().getColumn(4).setPreferredWidth(134);
 		tableTimKiem.getColumnModel().getColumn(5).setPreferredWidth(53);
 		scrollPane.setViewportView(tableTimKiem);
+	}
+
+	private void DocDuLieuDBVaoTable() {
+		List<Thuoc> list = thuoc_dao.getThuocs();
+		
+		for(Thuoc t : list) {
+			modelTimKiem.addRow(new Object[] {
+					t.getMaThuoc(), t.getTenThuoc(), t.getNhaCungCap(),
+					t.getGiaThuoc(), t.getCongDung(), t.getSoLuong(),
+					t.getDonViTinh(), t.getNgaySanXuat(), t.getNgayHetHan()
+			});
+		}
+		
 	}
 }

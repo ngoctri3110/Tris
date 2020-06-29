@@ -11,6 +11,11 @@ import java.awt.Color;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import connectDB.ConnectDB;
+import dao.Thuoc_DAO;
+import entity.Thuoc;
+
 import java.awt.Font;
 import java.awt.Image;
 
@@ -24,6 +29,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GD__CapNhatThuoc extends JFrame {
 
@@ -38,7 +46,9 @@ public class GD__CapNhatThuoc extends JFrame {
 	private JTextField txtNgaySX;
 	private JTextField txtNgayHetHan;
 	private DefaultTableModel modelCapNhat;
-	private JComboBox<String> cboDonVi; 
+	private JComboBox<String> cboDonVi;
+	private Thuoc_DAO thuoc_dao;
+	private JComboBox cboTim; 
 
 	/**
 	 * Launch the application.
@@ -60,6 +70,16 @@ public class GD__CapNhatThuoc extends JFrame {
 	 * Create the frame.
 	 */
 	public GD__CapNhatThuoc() {
+		
+		try {
+			ConnectDB.getInstance().connect();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		thuoc_dao = new Thuoc_DAO();
+		
 		setTitle("CẬP NHẬT THÔNG TIN THUỐC");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1091, 670);
@@ -106,7 +126,7 @@ public class GD__CapNhatThuoc extends JFrame {
 				txtNgayHetHan.setText(modelCapNhat.getValueAt(row, 8).toString());
 			}
 		});
-		tablecapnhat.setFont(new Font("Tahoma", Font.BOLD, 18));
+		tablecapnhat.setFont(new Font("Tahoma", Font.BOLD, 13 ));
 		tablecapnhat.setModel(modelCapNhat = new DefaultTableModel(
 			new Object[][] {
 			},
@@ -114,7 +134,12 @@ public class GD__CapNhatThuoc extends JFrame {
 				"M\u00E3 Thu\u1ED1c", "T\u00EAn Thu\u1ED1c", "Nh\u00E0 cung c\u1EA5p", "Gi\u00E1 thu\u1ED1c", "C\u00F4ng d\u1EE5ng", "S\u1ED1 l\u01B0\u1EE3ng", "\u0110\u01A1n v\u1ECB", "Ng\u00E0y s\u1EA3n xu\u1EA5t", "Ng\u00E0y h\u1EBFt h\u1EA1n"
 			}
 		));
+		
+		DocDuLieuDBVaoTable();
 		scrollPane.setViewportView(tablecapnhat);
+		//
+
+		
 		
 		JPanel pCenter = new JPanel();
 		pCenter.setBackground(new Color(255, 255, 224));
@@ -128,9 +153,11 @@ public class GD__CapNhatThuoc extends JFrame {
 		lblTim.setFont(new Font("Tahoma", Font.BOLD, 16));
 		pCenter.add(lblTim);
 		
-		JComboBox cbTim = new JComboBox();
-		cbTim.setBounds(154, 28, 127, 22);
-		pCenter.add(cbTim);
+		cboTim = new JComboBox();
+		cboTim.setBounds(154, 28, 127, 22);
+		pCenter.add(cboTim);
+		
+		
 		
 		JLabel lblMaThuoc = new JLabel("Mã Thuốc :");
 		lblMaThuoc.setBounds(23, 65, 111, 13);
@@ -197,8 +224,9 @@ public class GD__CapNhatThuoc extends JFrame {
 		lblDonVi.setFont(new Font("Tahoma", Font.BOLD, 16));
 		pCenter.add(lblDonVi);
 		
-		JComboBox cboDonVi = new JComboBox();
+		cboDonVi = new JComboBox();
 		cboDonVi.setBounds(517, 62, 153, 22);
+		cboDonVi.setEditable(true);
 		pCenter.add(cboDonVi);
 		
 		JLabel lblNgaySX = new JLabel("Ngày Sản Xuất :");
@@ -251,17 +279,10 @@ public class GD__CapNhatThuoc extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Object o = e.getSource();
 				if(o.equals(btnXoaRong)) {
-					txtMaThuoc.setText("");
-					txtTenThuoc.setText("");
-					txtNhaCungCap.setText("");
-					txtGiaThuoc.setText("");
-					txtCongDung.setText("");
-					txtSoluong.setText("");
-					txtNgaySX.setText("");
-					txtNgayHetHan.setText("");
-					txtMaThuoc.requestFocus();
+					clearTextfields();	
 				}
 			}
+
 		});
 		Image img_XoaRong = new ImageIcon(this.getClass().getResource("/img/xoarong.png")).getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
 		btnXoaRong.setIcon(new ImageIcon(img_XoaRong));
@@ -299,5 +320,60 @@ public class GD__CapNhatThuoc extends JFrame {
 		btnQuayLai.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnQuayLai.setBounds(804, 32, 152, 34);
 		pSouth.add(btnQuayLai);
+		
+		//
+		
+		ArrayList<Thuoc> listThuoc = thuoc_dao.getThuocs();
+		for(Thuoc t : listThuoc) {
+			cboTim.addItem(t.getMaThuoc());
+		}
+		
+		cboTim.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Object o = e.getSource();
+				int row = tablecapnhat.getSelectedRow();
+				ArrayList<Thuoc> listTimKiemThuoc = thuoc_dao.getTimKiemThuoc(modelCapNhat.getValueAt(row, 1).toString());
+				if(o.equals(cboTim)) {
+					
+					for(Thuoc t : listTimKiemThuoc) {
+						txtMaThuoc.setText(t.getMaThuoc());
+						txtTenThuoc.setText(t.getTenThuoc());
+						
+					}
+					
+					
+				}
+				
+			}
+		});
+		
+	}
+	
+	
+	private void DocDuLieuDBVaoTable() {
+		List<Thuoc> list = thuoc_dao.getThuocs();
+		
+		for(Thuoc t : list) {
+			modelCapNhat.addRow(new Object[] {
+					t.getMaThuoc(), t.getTenThuoc(), t.getNhaCungCap(),
+					t.getGiaThuoc(), t.getCongDung(), t.getSoLuong(),
+					t.getDonViTinh(), t.getNgaySanXuat(), t.getNgayHetHan()
+			});
+		}
+	}
+	
+
+	private void clearTextfields() {
+		// TODO Auto-generated method stub
+		txtMaThuoc.setText("");
+		txtTenThuoc.setText("");
+		txtNhaCungCap.setText("");
+		txtGiaThuoc.setText("");
+		txtCongDung.setText("");
+		txtSoluong.setText("");
+		txtNgaySX.setText("");
+		txtNgayHetHan.setText("");
+		txtMaThuoc.requestFocus();
+		
 	}
 }

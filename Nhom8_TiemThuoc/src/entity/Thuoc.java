@@ -8,22 +8,20 @@ public class Thuoc {
 	private String nhaCungCap;
 	private double giaThuoc;
 	private String congDung;
-	private int soLuongTon;
-	private int soLuongHetHan;
+	private int soLuong;
 	private String donViTinh;
 	private Date ngaySanXuat;
 	private Date ngayHetHan;
 	
-	public Thuoc(String maThuoc, String tenThuoc, String nhaCungCap, double giaThuoc, String congDung, int soLuongTon,
-			int soLuongHetHan, String donViTinh, Date ngaySanXuat, Date ngayHetHan) {
+	public Thuoc(String maThuoc, String tenThuoc, String nhaCungCap, double giaThuoc, String congDung, int soLuong,
+			 String donViTinh, Date ngaySanXuat, Date ngayHetHan) {
 		super();
 		this.maThuoc = maThuoc;
 		this.tenThuoc = tenThuoc;
 		this.nhaCungCap = nhaCungCap;
 		this.giaThuoc = giaThuoc;
 		this.congDung = congDung;
-		this.soLuongTon = soLuongTon;
-		this.soLuongHetHan = soLuongHetHan;
+		this.soLuong = soLuong;
 		this.donViTinh = donViTinh;
 		this.ngaySanXuat = ngaySanXuat;
 		this.ngayHetHan = ngayHetHan;
@@ -58,17 +56,11 @@ public class Thuoc {
 	public void setCongDung(String congDung) {
 		this.congDung = congDung;
 	}
-	public int getSoLuongTon() {
-		return soLuongTon;
+	public int getSoLuong() {
+		return soLuong;
 	}
-	public void setSoLuongTon(int soLuongTon) {
-		this.soLuongTon = soLuongTon;
-	}
-	public int getSoLuongHetHan() {
-		return soLuongHetHan;
-	}
-	public void setSoLuongHetHan(int soLuongHetHan) {
-		this.soLuongHetHan = soLuongHetHan;
+	public void setSoLuong(int soLuong) {
+		this.soLuong = soLuong;
 	}
 	public String getDonViTinh() {
 		return donViTinh;
@@ -91,8 +83,8 @@ public class Thuoc {
 	@Override
 	public String toString() {
 		return "Thuoc [maThuoc=" + maThuoc + ", tenThuoc=" + tenThuoc + ", nhaCungCap=" + nhaCungCap + ", giaThuoc="
-				+ giaThuoc + ", congDung=" + congDung + ", soLuongTon=" + soLuongTon + ", soLuongHetHan="
-				+ soLuongHetHan + ", donViTinh=" + donViTinh + ", ngaySanXuat=" + ngaySanXuat + ", ngayHetHan="
+				+ giaThuoc + ", congDung=" + congDung + ", soLuongTon=" + soLuong + ", soLuongHetHan="
+				+ ", donViTinh=" + donViTinh + ", ngaySanXuat=" + ngaySanXuat + ", ngayHetHan="
 				+ ngayHetHan + "]";
 	}
 	
